@@ -14,6 +14,7 @@ requires = [
     'pyramid_debugtoolbar',
     'zope.sqlalchemy',
     'waitress',
+    'prism_core',
     ]
 
 setup(name='prism_rest',
