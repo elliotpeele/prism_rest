@@ -12,6 +12,17 @@
 
 from .renderer import APISerializer
 
+from .views import APIView
+from .views import BaseView
+from .views import ApiAuthView
+from .views import BaseAuthView
+from .views import view_defaults
+
+from .viewmodels import view_requires
+from .viewmodels import view_provides
+from .viewmodels import BaseViewModel
+from .viewmodels import BaseCollectionViewModel
+
 def includeme(config):
     config.add_renderer('prism_renderer', APISerializer)
 
