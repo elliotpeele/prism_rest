@@ -14,7 +14,7 @@ from .renderer import APISerializer
 
 from .views import APIView
 from .views import BaseView
-from .views import ApiAuthView
+from .views import APIAuthView
 from .views import BaseAuthView
 from .views import view_defaults
 
