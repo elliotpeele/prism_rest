@@ -172,6 +172,7 @@ class AbstractViewModel(object):
 
     version = None
     model_name = None
+    model_type = None
     dbmodelCls = None
     static_model = False
 
@@ -249,7 +250,7 @@ class BaseViewModel(AbstractViewModel):
         # Add metadata that should be in pretty much every model.
         if not self.static_model:
             output['metadata'] = {
-                'type': self.model_name,
+                'type': self.model_type or self.model_name,
                 'version': self.version,
                 'creation_date': getattr(data, 'creation_date', None),
                 'modification_date': getattr(data, 'modification_date', None),
@@ -285,7 +286,7 @@ class BaseCollectionViewModel(AbstractViewModel):
 
         output = {
             'metadata': {
-                'type': self.model_name,
+                'type': self.model_type or self.model_name,
                 'version': self.version,
                 'count': len(data),
                 'limit': len(data),
