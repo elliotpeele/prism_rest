@@ -20,6 +20,8 @@ from .views import view_defaults
 
 from .viewmodels import view_requires
 from .viewmodels import view_provides
+from .viewmodels import register_model
+
 from .viewmodels import BaseViewModel
 from .viewmodels import BaseCollectionViewModel
 
