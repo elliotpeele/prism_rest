@@ -17,10 +17,13 @@ other serialization formats based on request headers.
 """
 
 import json
+import logging
 import datetime
 
 from prism_rest import viewmodels
 from prism_rest.errors import ViewModelNotFoundError
+
+log = logging.getLogger('prism.rest.renderer')
 
 class APISerializer(object):
     def __init__(self, info):
