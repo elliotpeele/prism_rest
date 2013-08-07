@@ -13,10 +13,7 @@
 from .renderer import APISerializer
 
 from .views import APIView
-from .views import BaseView
 from .views import APIAuthView
-from .views import BaseAuthView
-from .views import view_defaults
 
 from .viewmodels import view_requires
 from .viewmodels import view_provides
@@ -34,6 +31,8 @@ def includeme(config):
     config.add_route('base_view_auth', '/base/auth')
     config.add_route('base_api', '/base/api')
     config.add_route('base_api_auth', '/base/api_auth')
+
+    config.include('prism_core')
 
     config.scan()
     return config
