@@ -16,11 +16,13 @@ Core module for storing common view super class.
 
 import logging
 
+from prism_core.views import lift
 from prism_core.views import BaseView
 from prism_core.views import view_defaults
 
 log = logging.getLogger('prism.rest.views')
 
+@lift()
 @view_defaults(renderer='prism_renderer', route_name='base_api')
 class APIView(BaseView):
     """
@@ -28,6 +30,7 @@ class APIView(BaseView):
     """
 
 
+@lift()
 @view_defaults(route_name='base_api_auth', permission='authenticated')
 class APIAuthView(APIView):
     """
