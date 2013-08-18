@@ -18,9 +18,6 @@ other serialization formats based on request headers.
 
 import json
 import logging
-import datetime
-
-from prism_core.util import AttrDict
 
 from prism_rest import viewmodels
 from prism_rest.errors import ViewModelNotFoundError
@@ -112,35 +109,5 @@ class JSONEncoder(json.JSONEncoder):
 def register_encoder(type_cls):
     def deco(cls):
         JSONEncoder.register_encoder(type_cls, cls())
+        return cls
     return deco
-
-
-class AbstractEncoder(object):
-    """
-    Base class for all other encoders to inherit from.
-    """
-
-    def encode(self, value):
-        raise NotImplementedError
-
-
-@register_encoder(datetime.datetime)
-class DateTimeEncoder(AbstractEncoder):
-    """
-    Handle encoding datetime objects.
-    """
-
-    def encode(self, value):
-        # FIXME: Using ctime for now, should probably find something better that
-        #        supports timezones.
-        return value.ctime()
-
-
-@register_encoder(datetime.date)
-class DateEncoder(AbstractEncoder):
-    """
-    Handle encoding date objects.
-    """
-
-    def encode(self, value):
-        return '%s/%s/%s' % (value.year, value.month, value.day)
