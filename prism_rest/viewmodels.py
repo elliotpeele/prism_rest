@@ -10,7 +10,9 @@
 # or fitness for a particular purpose. See the MIT License for full details.
 #
 
+import re
 import json
+import types
 import logging
 import collections
 
@@ -148,6 +150,8 @@ class JSONDecoder(object):
     Custom JSON decoder.
     """
 
+    _decoders = {}
+
     def __init__(self, request):
         self.request = request
 
@@ -161,7 +165,35 @@ class JSONDecoder(object):
             model = modelCls(self.request)
             return model.deserialize(pairs)
 
-        return AttrDict(pairs)
+        data = AttrDict()
+        for k, v in pairs.iteritems():
+            decoder = self.get_decoder(v)
+            if decoder:
+                v = decoder.decode(v)
+            data[k] = v
+
+        return data
+
+    @classmethod
+    def get_decoder(cls, o):
+        for regex, decoder in cls._decoders.iteritems():
+            if isinstance(o, int):
+                o = str(o)
+            if not isinstance(o, types.StringTypes):
+                continue
+            if regex.match(o):
+                return decoder
+
+    @classmethod
+    def register_decoder(cls, regexStr, decoder):
+        cls._decoders[re.compile(regexStr)] = decoder
+
+
+def register_decoder(matchStr):
+    def deco(cls):
+        JSONDecoder.register_decoder(matchStr, cls())
+        return cls
+    return deco
 
 
 class AbstractViewModel(object):
