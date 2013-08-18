@@ -242,19 +242,19 @@ class BaseViewModel(AbstractViewModel):
         if self._isSerialized(data):
             return data
 
-        output = {}
+        output = AttrDict()
         for field in self.fields:
             if hasattr(data, field):
                 output[field] = getattr(data, field)
 
         # Add metadata that should be in pretty much every model.
         if not self.static_model:
-            output['metadata'] = {
+            output['metadata'] = AttrDict({
                 'type': self.model_type or self.model_name,
                 'version': self.version,
                 'creation_date': getattr(data, 'creation_date', None),
                 'modification_date': getattr(data, 'modification_date', None),
-            }
+            })
 
         # Generate URLs for ID fields.
         output.update(self._compute_id_fields(data))
