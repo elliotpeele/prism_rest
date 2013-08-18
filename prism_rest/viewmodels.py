@@ -299,6 +299,8 @@ class BaseViewModel(AbstractViewModel):
                 setattr(self, field, data.get(field))
             else:
                 setattr(self, field, None)
+        if 'metadata' in data:
+            self.metadata = data['metadata']
         return self
 
 
