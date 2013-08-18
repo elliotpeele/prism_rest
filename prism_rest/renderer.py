@@ -20,6 +20,8 @@ import json
 import logging
 import datetime
 
+from prism_core.util import AttrDict
+
 from prism_rest import viewmodels
 from prism_rest.errors import ViewModelNotFoundError
 
