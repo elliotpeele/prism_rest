@@ -7,13 +7,6 @@ README = open(os.path.join(here, 'README.txt')).read()
 CHANGES = open(os.path.join(here, 'CHANGES.txt')).read()
 
 requires = [
-    'pyramid',
-    'SQLAlchemy',
-    'transaction',
-    'pyramid_tm',
-    'pyramid_debugtoolbar',
-    'zope.sqlalchemy',
-    'waitress',
     'prism_core',
     ]
 
@@ -27,10 +20,10 @@ setup(name='prism_rest',
         "Topic :: Internet :: WWW/HTTP",
         "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
         ],
-      author='',
-      author_email='',
+      author='Elliot Peele',
+      author_email='elliot@bentlogic.net',
       url='',
-      keywords='web wsgi bfg pylons pyramid',
+      keywords='web wsgi bfg pylons pyramid rest',
       packages=find_packages(),
       include_package_data=True,
       zip_safe=False,
