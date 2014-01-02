@@ -241,6 +241,9 @@ class AbstractViewModel(object):
                 var_name = None
 
             kw = self._get_var_dict(data, var_name)
+            if field == 'id' and self.request.params:
+                kw['_query'] = self.request.params
+
             output[field] = self.request.route_url(route_name, **kw)
 
         return output
