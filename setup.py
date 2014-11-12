@@ -22,7 +22,7 @@ setup(name='prism_rest',
         ],
       author='Elliot Peele',
       author_email='elliot@bentlogic.net',
-      url='',
+      url='https://github.com/elliotpeele/prism_rest',
       keywords='web wsgi bfg pylons pyramid rest',
       packages=find_packages(),
       include_package_data=True,
@@ -32,7 +32,5 @@ setup(name='prism_rest',
       entry_points="""\
       [paste.app_factory]
       main = prism_rest:main
-      [console_scripts]
-      initialize_prism_rest_db = prism_rest.scripts.initializedb:main
       """,
       )
