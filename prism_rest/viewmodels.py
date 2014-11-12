@@ -222,10 +222,18 @@ class AbstractViewModel(object):
             if not arg:
                 continue
 
-            if hasattr(dbmodel, arg):
+            # Map of route var to model var
+            if isinstance(arg, dict):
+                for route_var, model_var in arg.iteritems():
+                    if hasattr(dbmodel, model_var):
+                        kw[route_var] = getattr(dbmodel, model_var)
+                    elif model_var in self.request.matchdict:
+                        kw[route_var] = self.request.matchdict.get(model_var)
+
+            elif hasattr(dbmodel, arg):
                 kw[arg] = getattr(dbmodel, arg)
 
-            if arg in self.request.matchdict:
+            elif arg in self.request.matchdict:
                 kw[arg] = self.request.matchdict.get(arg)
 
         return kw
